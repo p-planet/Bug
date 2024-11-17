@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://oqwq1034yv6t"]
+
+[ext_resource type="PackedScene" uid="uid://b5ff0iptkhitf" path="res://Blends/four-legged-bug.glb" id="1_kklvk"]
+
+[node name="four-legged-bug" instance=ExtResource("1_kklvk")]
+
+[node name="Skeleton3D" parent="root_001" index="0"]
+bones/1/rotation = Quaternion(0.653392, 0.00740935, 0.00639562, 0.756957)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/rotation = Quaternion(0.803071, 0.113946, -0.0791579, 0.579506)
+bones/4/rotation = Quaternion(-3.95754e-05, 0.0223794, 0.00454365, 0.999739)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(0.369546, 0.0693047, -0.189733, 0.906992)
+bones/8/scale = Vector3(1, 1, 1)
+bones/10/rotation = Quaternion(-0.061616, -0.0513499, 0.105532, 0.991176)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/rotation = Quaternion(0.070391, -0.00938007, -0.000942768, 0.997475)
+bones/12/rotation = Quaternion(-0.704044, 0.0395091, -0.0382218, 0.708025)
+bones/13/rotation = Quaternion(0.118904, -0.0125889, -0.108429, 0.986887)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(0.105909, -0.0993082, 0.119178, 0.982201)
+bones/18/rotation = Quaternion(-0.129857, -2.58379e-09, -0.0244245, 0.991232)
+bones/18/scale = Vector3(1, 1, 1)
+bones/19/rotation = Quaternion(0.000114468, -2.42721e-08, -0.00100598, 0.999999)
+bones/20/rotation = Quaternion(0.801368, -0.125268, 0.0948626, 0.577164)
+bones/20/scale = Vector3(1, 1, 1)
+bones/22/rotation = Quaternion(-3.95661e-05, -0.0223794, -0.00454366, 0.999739)
+bones/22/scale = Vector3(1, 1, 1)
+bones/23/rotation = Quaternion(0.715449, -0.106952, 0.104077, 0.682541)
+bones/23/scale = Vector3(1, 1, 1)
+bones/25/rotation = Quaternion(0.0184804, 0.027334, 0.0387376, 0.998705)
+bones/25/scale = Vector3(1, 1, 1)
+bones/26/rotation = Quaternion(0.365761, -0.0870456, 0.196931, 0.905461)
+bones/26/scale = Vector3(1, 1, 1)
+bones/28/scale = Vector3(1, 1, 1)

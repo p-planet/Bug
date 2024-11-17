@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=3 uid="uid://c12xstdyorcp3"]
+
+[ext_resource type="PackedScene" uid="uid://b5ff0iptkhitf" path="res://Blends/four-legged-bug.glb" id="1_7bcf0"]
+[ext_resource type="Script" path="res://bug_character.gd" id="1_rfapk"]
+[ext_resource type="Texture2D" uid="uid://kru8t3e47c03" path="res://addons/godot-prototype-texture/Vector/grid_512x512/grid_black_512x512.svg" id="2_fde77"]
+[ext_resource type="Script" path="res://rigid_feet.gd" id="4_re54x"]
+[ext_resource type="Texture2D" uid="uid://qous7oyqbufb" path="res://addons/godot-prototype-texture/Vector/grid_512x512/grid_white_512x512.svg" id="5_b4d8v"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5irar"]
+friction = 0.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nq3cv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_usawo"]
+albedo_texture = ExtResource("2_fde77")
+
+[sub_resource type="SphereMesh" id="SphereMesh_mu4yd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_r10r5"]
+radius = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34o52"]
+albedo_texture = ExtResource("5_b4d8v")
+
+[sub_resource type="SphereMesh" id="SphereMesh_wxeue"]
+radius = 0.35
+height = 0.7
+
+[node name="RigidBug3D" type="RigidBody3D"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.581807, 0)
+collision_layer = 2
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_5irar")
+script = ExtResource("1_rfapk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_nq3cv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+visible = false
+material_override = SubResource("StandardMaterial3D_usawo")
+mesh = SubResource("SphereMesh_mu4yd")
+skeleton = NodePath("../..")
+
+[node name="four-legged-bug" parent="." instance=ExtResource("1_7bcf0")]
+transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0, -0.55908, 0)
+
+[node name="Skeleton3D" parent="four-legged-bug/root_001" index="0"]
+bones/4/rotation = Quaternion(-0.000525026, 0.022475, 0.00447497, 0.999475)
+bones/5/position = Vector3(0.710475, 1.71748, 0.996475)
+bones/5/rotation = Quaternion(0.717475, 0.093475, -0.090525, 0.684475)
+
+[node name="IK_FL" type="SkeletonIK3D" parent="four-legged-bug/root_001/Skeleton3D" index="1"]
+transform = Transform3D(4.34783, 0, 0, 0, 4.34783, 0, 0, 0, 4.34783, 0, 2.43078, 0)
+root_bone = &"front-leg.L"
+tip_bone = &"front-leg.IK.L"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../TargetContainer/Marker3D_FL")
+
+[node name="IK_FR" type="SkeletonIK3D" parent="four-legged-bug/root_001/Skeleton3D" index="2"]
+transform = Transform3D(4.34783, 0, 0, 0, 4.34783, 0, 0, 0, 4.34783, 0, 2.43078, 0)
+root_bone = &"front-leg.R"
+tip_bone = &"front-leg.IK.R"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../TargetContainer/Marker3D_FR")
+
+[node name="IK_BL" type="SkeletonIK3D" parent="four-legged-bug/root_001/Skeleton3D" index="3"]
+transform = Transform3D(4.34783, 0, 0, 0, 4.34783, 0, 0, 0, 4.34783, 0, 2.43078, 0)
+root_bone = &"back-leg.L"
+tip_bone = &"back-leg.IK.L"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../TargetContainer/Marker3D_BL")
+
+[node name="IK_BR" type="SkeletonIK3D" parent="four-legged-bug/root_001/Skeleton3D" index="4"]
+transform = Transform3D(4.34783, 0, 0, 0, 4.34783, 0, 0, 0, 4.34783, 0, 2.43078, 0)
+root_bone = &"back-leg.R"
+tip_bone = &"back-leg.IK.R"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../TargetContainer/Marker3D_BR")
+
+[node name="TargetContainer" type="Node3D" parent="four-legged-bug/root_001/Skeleton3D" index="5"]
+
+[node name="Marker3D_FL" type="Marker3D" parent="four-legged-bug/root_001/Skeleton3D/TargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08243, 0, 0.510815)
+
+[node name="Marker3D_FR" type="Marker3D" parent="four-legged-bug/root_001/Skeleton3D/TargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39713, 0, 0.531113)
+
+[node name="Marker3D_BL" type="Marker3D" parent="four-legged-bug/root_001/Skeleton3D/TargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47155, 0, -1.15018)
+
+[node name="Marker3D_BR" type="Marker3D" parent="four-legged-bug/root_001/Skeleton3D/TargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47155, 0, -1.15695)
+
+[node name="Skeleton3D" type="Skeleton3D" parent="."]
+
+[node name="RigidFeet" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.227365, 0)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("4_re54x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidFeet"]
+shape = SubResource("SphereShape3D_r10r5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidFeet"]
+visible = false
+material_override = SubResource("StandardMaterial3D_34o52")
+mesh = SubResource("SphereMesh_wxeue")
+
+[node name="RayFeet" type="RayCast3D" parent="."]
+
+[editable path="four-legged-bug"]
