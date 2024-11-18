@@ -1,5 +1,5 @@
 extends RigidBody3D
-class_name Bug
+class_name BugBody3D
 
 
 @export var max_speed:float = 50.0
@@ -33,7 +33,6 @@ var contact_normals: Array = []
 
 func _ready():
 	linear_damp = 0.0
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 
 func _physics_process(delta):

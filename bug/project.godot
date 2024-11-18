@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Controls="*res://controls.gd"
+controls="*res://controls.gd"
 
 [input]
 

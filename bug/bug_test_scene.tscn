@@ -5,16 +5,41 @@
 [ext_resource type="Script" path="res://camera_control.gd" id="3_oxr6o"]
 [ext_resource type="Script" path="res://camera.gd" id="4_2jnx3"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_cvicb"]
+margin = 0.2
+radius = 0.25
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yfkt"]
 albedo_texture = ExtResource("1_8l6yd")
 uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_cvicb"]
-margin = 0.2
-radius = 0.25
-
 [node name="BugTestScene" type="Node3D"]
+
+[node name="PlayerStuff" type="Node" parent="."]
+
+[node name="BugBody3D" parent="PlayerStuff" instance=ExtResource("1_bryjh")]
+
+[node name="CameraControl" type="Node3D" parent="PlayerStuff/BugBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.227229, 0)
+script = ExtResource("3_oxr6o")
+
+[node name="yaw" type="Node3D" parent="PlayerStuff/BugBody3D/CameraControl"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="PlayerStuff/BugBody3D/CameraControl/yaw"]
+shape = SubResource("SphereShape3D_cvicb")
+spring_length = 6.0
+
+[node name="CameraPosition" type="Node3D" parent="PlayerStuff/BugBody3D/CameraControl/yaw/SpringArm3D"]
+
+[node name="CameraTarget" type="Node3D" parent="PlayerStuff/BugBody3D/CameraControl"]
+
+[node name="BugCam" type="Camera3D" parent="PlayerStuff" node_paths=PackedStringArray("cam_pos", "cam_target")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("4_2jnx3")
+cam_pos = NodePath("../BugBody3D/CameraControl/yaw/SpringArm3D/CameraPosition")
+cam_target = NodePath("../BugBody3D/CameraControl")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02766, 0.4995)
@@ -22,24 +47,5 @@ material_override = SubResource("StandardMaterial3D_5yfkt")
 use_collision = true
 size = Vector3(100, 2, 100)
 
-[node name="RigidBug3D" parent="." instance=ExtResource("1_bryjh")]
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.383207, -0.680237, -0.624844, -0.227923, -0.725206, 0.649714, -0.8951, -0.106558, -0.432946, 0, 10.7521, 0)
-
-[node name="CameraControl" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
-script = ExtResource("3_oxr6o")
-
-[node name="yaw" type="Node3D" parent="CameraControl"]
-
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraControl/yaw"]
-shape = SubResource("SphereShape3D_cvicb")
-spring_length = 4.0
-
-[node name="CameraPosition" type="Node3D" parent="CameraControl/yaw/SpringArm3D"]
-
-[node name="BugCam" type="Camera3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
-script = ExtResource("4_2jnx3")
+transform = Transform3D(0.383207, -0.680237, -0.624845, -0.227923, -0.725206, 0.649713, -0.8951, -0.106558, -0.432945, 0, 10.7521, 0)
