@@ -1,4 +1,5 @@
 extends Node
+class_name BugControl
 
 var mouse_input := Vector2.ZERO
 var left_stick_input := Vector2.ZERO
@@ -9,11 +10,30 @@ var right_stick_input := Vector2.ZERO
 
 
 @export var bugcam : BugCam 
-@export var bugcam_controller : CameraControl 
+@export var bugcam_controller : CameraControl
 @export var bug : BugBody3D
 
-signal button
+const InputType = InputController.InputType
+@onready var input_controller:InputController = $InputController
 
+
+
+func _ready():
+	input_controller.input_detected.connect(_on_input_detected)
+	
+func _on_input_detected(event: InputEvent, action: String, input_type: InputType):
+	match input_type:
+		InputType.TAP:
+			prints(action, "tapped")
+		InputType.DOUBLE_TAP:
+			prints(action, "double tapped")
+		InputType.PRESS:
+			prints(action, "pressed")
+		InputType.LONG_PRESS:
+			prints(action, "long pressed")
+		InputType.HOLD:
+			prints(action, "held")
+	
 enum PlayerAction {
 	HOP,
 	DUCK,

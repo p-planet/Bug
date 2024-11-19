@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bc7rtfuj1qkou"]
+[gd_scene load_steps=9 format=3 uid="uid://bc7rtfuj1qkou"]
 
 [ext_resource type="Texture2D" uid="uid://cyvv518t0amkr" path="res://addons/godot-prototype-texture/Vector/grid_512x512/grid_lime_512x512.svg" id="1_8l6yd"]
 [ext_resource type="PackedScene" uid="uid://c12xstdyorcp3" path="res://BugCharacter.tscn" id="1_bryjh"]
 [ext_resource type="Script" path="res://camera_control.gd" id="3_oxr6o"]
 [ext_resource type="Script" path="res://camera.gd" id="4_2jnx3"]
+[ext_resource type="Script" path="res://addons/input_controller/input_controller.gd" id="4_pmxpg"]
+[ext_resource type="Script" path="res://controls.gd" id="4_pq6rq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cvicb"]
 margin = 0.2
@@ -40,6 +42,12 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 script = ExtResource("4_2jnx3")
 cam_pos = NodePath("../BugBody3D/CameraControl/yaw/SpringArm3D/CameraPosition")
 cam_target = NodePath("../BugBody3D/CameraControl")
+
+[node name="Controls" type="Node" parent="PlayerStuff"]
+script = ExtResource("4_pq6rq")
+
+[node name="InputController" type="Node" parent="PlayerStuff/Controls"]
+script = ExtResource("4_pmxpg")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02766, 0.4995)

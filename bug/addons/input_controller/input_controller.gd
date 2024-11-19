@@ -1,6 +1,6 @@
 @icon("res://addons/input_controller/icon.svg")
-class_name InputController
 extends Node
+class_name InputController
 
 signal input_detected(event: InputEvent, action: String, input_type: InputType)
 
